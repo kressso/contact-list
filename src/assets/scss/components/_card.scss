@@ -45,7 +45,13 @@
     }
   }
 
+  .is-favorite {
+    fill: getColor('secondary-3');
+    stroke: getColor('secondary-3');
+  }
+
   &-add {
+    min-height: calc-rem(60px);
     border: none;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%232DA1AD' stroke-width='2' stroke-dasharray='6%2c6' stroke-dashoffset='4' stroke-linecap='round'/%3e%3c/svg%3e");
 
@@ -109,6 +115,7 @@
 
     &-add {
       justify-content: center;
+      min-height: calc-rem(150px);
 
       svg {
         margin: 0 0 calc-rem(11px);

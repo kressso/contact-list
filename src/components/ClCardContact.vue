@@ -5,9 +5,12 @@
     </div>
     <p class="name text--14-18 bold"><slot>No name entered</slot></p>
     <div class="icons">
-      <ClSvgHart @click.native="handleClick($event)" />
+      <ClSvgHart
+        @click.native="toggleFavorite($event)"
+        :class="{ 'is-favorite': user.isFavorite }"
+      />
       <ClSvgEdit @click.native="handleClick($event)" />
-      <ClSvgTrash @click.native="handleClick($event)" />
+      <ClSvgTrash @click.native="deleteUser($event)" />
     </div>
   </div>
   <div v-else-if="addNew" class="card card-add" @click="handleClick($event)">
@@ -23,6 +26,14 @@ export default {
     addNew: {
       type: Boolean,
       default: false
+    },
+    user: {
+      type: Object,
+      default: () => ({})
+    },
+    isFavorite: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -33,9 +44,12 @@ export default {
     }
   },
   methods: {
-    handleClick() {
-      console.log("kliknuto");
-      this.$emit("click", event);
+    toggleFavorite() {
+      console.log("kliknuto ", this.user._id);
+      this.$store.commit("toggleFavorite", this.user._id);
+    },
+    deleteUser() {
+      this.$store.commit("deleteUser", this.user._id);
     }
   }
 };

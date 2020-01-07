@@ -17,32 +17,18 @@
       /> -->
     </form>
     <section class="section-1 base-wrap">
-      <!-- <ClButton @click="test"> Klik me </ClButton>
-    <ClButton @click="test" disabled> Klik me </ClButton>
-    <ClButton @click="test" color="secondary"> Klik me </ClButton> -->
-      <!-- <br />
-    <br />
-    <br /> -->
       <div class="grid-wrap">
         <ClCardContact add-new @click="addNewRoute"></ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
+
+        <template v-for="user in $store.state.users">
+          <ClCardContact :user="user" :key="user.id">
+            {{ user.fullName }}
+          </ClCardContact>
+        </template>
+
+        <!-- <ClCardContact v-for="contact in allUsers" :key="contact.id">
+          {{ contact.fullName }}
+        </ClCardContact> -->
       </div>
     </section>
   </div>
@@ -51,11 +37,19 @@
 <script>
 export default {
   name: "ClContactsAll",
+  data() {
+    return {
+      allUsers: this.$store.state.users
+    };
+  },
   methods: {
     addNewRoute() {
       console.log("eo me cliked");
       this.$router.push("/add-new");
     }
+  },
+  created() {
+    console.log("daaaj ", this.allUsers);
   }
 };
 </script>

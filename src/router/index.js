@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '../views/Home.vue'
 import Contacts from '../views/contacts/Contacts.vue'
 
 Vue.use(VueRouter)
@@ -44,6 +43,7 @@ const routes = [
     name: 'error',
     component: () => import(/* webpackChunkName: "error" */ '../views/Error.vue')
   }
+
 
 
   // contacts / all
