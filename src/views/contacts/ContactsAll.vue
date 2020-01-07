@@ -1,34 +1,26 @@
 <template>
   <div class="contacts">
     <form class="form">
-      <input
-        type="text"
-        aria-label="Search"
-        name="firstname"
-        placeholder="ICON"
-        class="search"
-      />
-      <!-- <input
-        type="search"
-        aria-label="Search"
-        name="firstname"
-        placeholder="ICON"
-        class="search"
-      /> -->
+      <label class="label"
+        ><ClSvgSearch />
+        <input
+          type="text"
+          aria-label="Search"
+          name="firstname"
+          class="search"
+          v-model="search"
+        />
+      </label>
     </form>
     <section class="section-1 base-wrap">
       <div class="grid-wrap">
-        <ClCardContact add-new @click="addNewRoute"></ClCardContact>
+        <ClCardContact add-new></ClCardContact>
 
-        <template v-for="user in $store.state.users">
+        <template v-for="user in filteredContent">
           <ClCardContact :user="user" :key="user.id">
             {{ user.fullName }}
           </ClCardContact>
         </template>
-
-        <!-- <ClCardContact v-for="contact in allUsers" :key="contact.id">
-          {{ contact.fullName }}
-        </ClCardContact> -->
       </div>
     </section>
   </div>
@@ -39,18 +31,22 @@ export default {
   name: "ClContactsAll",
   data() {
     return {
-      allUsers: this.$store.state.users
+      search: ""
     };
   },
-  methods: {
-    addNewRoute() {
-      console.log("eo me cliked");
-      this.$router.push("/add-new");
+  computed: {
+    filteredContent() {
+      let filtered = this.$store.state.users;
+      if (this.search) {
+        filtered = this.$store.state.users.filter(
+          x => x.fullName.toLowerCase().indexOf(this.search) > -1
+        );
+      }
+
+      return filtered;
     }
   },
-  created() {
-    console.log("daaaj ", this.allUsers);
-  }
+  methods: {}
 };
 </script>
 

@@ -9,11 +9,11 @@
         @click.native="toggleFavorite($event)"
         :class="{ 'is-favorite': user.isFavorite }"
       />
-      <ClSvgEdit @click.native="handleClick($event)" />
+      <ClSvgEdit @click.native="editUser($event)" />
       <ClSvgTrash @click.native="deleteUser($event)" />
     </div>
   </div>
-  <div v-else-if="addNew" class="card card-add" @click="handleClick($event)">
+  <div v-else-if="addNew" class="card card-add" @click="addNewRoute($event)">
     <ClSvgCross />
     <p class="card-add__title small">Add new</p>
   </div>
@@ -50,6 +50,13 @@ export default {
     },
     deleteUser() {
       this.$store.commit("deleteUser", this.user._id);
+    },
+    editUser() {
+      console.log("ruta za edit");
+      // this.$router.push("/add-new");
+    },
+    addNewRoute() {
+      this.$router.push("/add-new");
     }
   }
 };

@@ -139,9 +139,18 @@
 
   @include mq(w768) {}
 
-  @include mq(w992) {}
+  @include mq(w992) {
 
-  @include mq(w1200) {}
+    &-add {
+      min-height: calc-rem(153px);
+    }
+  }
+
+  @include mq(w1200) {
+    &-add {
+      min-height: calc-rem(154px);
+    }
+  }
 
   @include mq(w1440) {}
 

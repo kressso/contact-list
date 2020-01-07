@@ -3,48 +3,47 @@
   justify-content: center;
   margin: 0 auto calc-rem(24px);
   width: 86%;
+
+  @include mq(w992) {
+    margin-bottom: calc-rem(60px);
+  }
 }
 
-.search:focus {
-  outline: getColor('primary-2') auto 3px;
+.label {
+  position: relative;
+  width: 100%;
+  height: calc-rem(50px);
+  max-width: calc-rem(540px);
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: calc-rem(24px);
+    transform: translateY(-50%);
+  }
+
+  @include mq(w992) {
+    height: calc-rem(60px)
+  }
 }
 
 .search {
+  transition: border $global-transition;
   width: 100%;
-  max-width: calc-rem(540px);
   height: calc-rem(50px);
+  padding-left: calc-rem(64px);
   background-color: getColor('secondary-1');
   border: 1px solid getColor('secondary-2');
   border-radius: calc-rem(4px);
   box-shadow: 0 2px 34px 0 getColor('secondary-3');
 
-
-  @include mq(w400) {}
-
-  @include mq(w480) {}
-
-  @include mq(w560) {}
-
-  @include mq(w640) {}
-
-  @include mq(w768) {}
+  &:focus {
+    // outline: getColor('primary-2') auto 3px;
+    outline: none;
+    border: 1px solid getColor('primary-2');
+  }
 
   @include mq(w992) {
     height: calc-rem(60px);
-    margin-bottom: calc-rem(60px);
   }
-
-  @include mq(w1200) {}
-
-  @include mq(w1440) {}
-
-  @include mq(w1600) {}
-
-  @include mq(w1740) {}
-
-  @include mq(w1920) {}
-
-  @include mq(w2160) {}
-
-  @include mq(w2560) {}
 }
