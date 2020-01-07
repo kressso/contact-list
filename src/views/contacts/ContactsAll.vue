@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="contacts">
     <form class="form">
       <input
         type="text"
@@ -24,7 +24,7 @@
     <br />
     <br /> -->
       <div class="grid-wrap">
-        <ClCardContact add-new></ClCardContact>
+        <ClCardContact add-new @click="addNewRoute"></ClCardContact>
         <ClCardContact>Ivan Delibasic</ClCardContact>
         <ClCardContact>Denis Susac</ClCardContact>
         <ClCardContact>Mirko Fodor</ClCardContact>
@@ -49,19 +49,16 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
-  name: "home",
-  components: {
-    // HelloWorld
-  },
+  name: "ClContactsAll",
   methods: {
-    // TODO: delete this
-    test() {
-      console.log("click");
+    addNewRoute() {
+      console.log("eo me cliked");
+      this.$router.push("/add-new");
     }
   }
 };
 </script>
+
+<style>
+</style>

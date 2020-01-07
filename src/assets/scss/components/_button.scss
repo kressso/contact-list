@@ -1,0 +1,43 @@
+.btn {
+  $btn-height: 42px;
+  @include full-font-style(14px, 18px);
+  padding: calc-rem(11px) calc-rem(30px);
+  height: calc-rem($btn-height);
+  min-width: calc-rem(160px);
+  color: getColor('secondary-1');
+  font-family: $primary-font;
+  font-weight: 700;
+  border: none;
+  border-radius: calc(#{$btn-height}/2);
+  transition: background-color $global-transition;
+  text-align: center;
+  background-color: var(--primary-2);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--primary-1);
+  }
+
+  &--primary {
+    background-color: var(--primary-2);
+
+    &:hover {
+      background-color: var(--primary-1);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--secondary-4);
+
+    &:hover {
+      background-color: var(--secondary-3);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    // pointer-events: none;
+    background-color: var(--secondary-4);
+    color: var(--secondary-3);
+  }
+}

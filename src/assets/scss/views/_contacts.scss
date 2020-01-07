@@ -1,0 +1,40 @@
+.contacts {
+  padding-top: calc-rem(24px);
+
+  .section-1 {
+    margin-bottom: calc-rem(70px);
+  }
+
+  .grid-wrap {
+    max-width: calc-rem(1170px);
+    margin: 0 auto;
+  }
+
+  @include mq(w640) {
+    .grid-wrap {
+      display: grid;
+      grid-gap: calc-rem(30px);
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    }
+  }
+
+  @include mq(w768) {}
+
+  @include mq(w992) {
+    padding-top: calc-rem(60px);
+  }
+
+  @include mq(w1200) {}
+
+  @include mq(w1440) {}
+
+  @include mq(w1600) {}
+
+  @include mq(w1740) {}
+
+  @include mq(w1920) {}
+
+  @include mq(w2160) {}
+
+  @include mq(w2560) {}
+}

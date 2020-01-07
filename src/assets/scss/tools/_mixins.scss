@@ -1,0 +1,132 @@
+/*
+*
+* creating typography params
+*
+*/
+// @mixin full-font-style($font-size, $letter-spacing, $line-height) {
+//   font-size: calc-rem($font-size);
+//   letter-spacing: calc-em($letter-spacing, $font-size);
+//   line-height: get-line-height($font-size, $line-height);
+// }
+@mixin full-font-style($font-size, $line-height) {
+  font-size: calc-rem($font-size);
+  line-height: get-line-height($font-size, $line-height);
+}
+
+/*
+*
+* create gradient animation for BUTTONS on hover
+* bcs its impossible to animate gradient classically
+*
+*/
+@mixin gradient-animation($gradient-initial, $gradient-hover, $transition, $border-radius) {
+  background-size: 100%;
+  background-image: $gradient-initial;
+  position: relative;
+  z-index: z("button-gradient");
+  border-radius: $border-radius;
+
+  &:before {
+    background-image: $gradient-hover;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    z-index: - z("button-gradient");
+    transition: opacity $transition;
+    border-radius: $border-radius;
+  }
+
+  &:hover {
+    background-position: 0% 100%;
+
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+*
+* prefixes for PLACEHOLDER
+*
+*/
+
+// @mixin placeholder-prefixes($color, $transition) {
+
+//   //all stacked together with animations dont work, need inputs on each
+//   &::placeholder {
+//     color: $color;
+//     transition: color $transition;
+//   }
+
+//   &::-webkit-input-placeholder {
+//     /* Chrome/Opera/Safari */
+//     color: $color;
+//     transition: color $transition;
+//   }
+
+//   &::-moz-placeholder {
+//     /* Firefox 19+ */
+//     color: $color;
+//     transition: color $transition;
+//     opacity: 1;
+//   }
+
+//   &:-ms-input-placeholder {
+//     /* IE 10+ */
+//     color: $color;
+//     transition: color $transition;
+//   }
+
+//   &:-moz-placeholder {
+//     /* Firefox 18- */
+//     color: $color;
+//     transition: color $transition;
+//     opacity: 1;
+//   }
+// }
+
+/*
+*
+* media query breakpoint generator
+*
+*/
+$breakpoints: ("w400": 400px,
+  "w480": 480px,
+  "w560": 560px,
+  "w640": 640px,
+  "w768": 768px,
+  "w992": 992px,
+  "w1200": 1200px,
+  "w1440": 1440px,
+  "w1600": 1600px,
+  // 1740 for removing paddings after base-wrap starts 
+  "w1740": 1740px,
+  "w1920": 1920px,
+  "w2160": 2160px,
+  "w2560": 2560px);
+
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+
+    @if $type==max {
+      $width: $width - 1px;
+    }
+
+    @media only screen and (#{$type}-width: calc-em($width)) {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    +"Please make sure it is defined in `$breakpoints` map.";
+  }
+}

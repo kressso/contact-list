@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: calc-rem(50px);
+  background-image: linear-gradient(182.65deg, getColor('primary-1') 0%, getColor('primary-3') 99.98%, getColor('primary-3') 100%);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+  &__btm-line {
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    background-color: getColor('secondary-1');
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    opacity: 0.3;
+    height: calc-rem(7px);
+  }
+
+  @include mq(w400) {}
+
+  @include mq(w480) {}
+
+  @include mq(w560) {}
+
+  @include mq(w640) {}
+
+  @include mq(w768) {}
+
+  @include mq(w992) {
+    height: calc-rem(60px);
+  }
+
+  @include mq(w1200) {}
+
+  @include mq(w1440) {}
+
+  @include mq(w1600) {}
+
+  @include mq(w1740) {}
+
+  @include mq(w1920) {}
+
+  @include mq(w2160) {}
+
+  @include mq(w2560) {}
+}

@@ -1,0 +1,31 @@
+$colors : ('primary-1': #78C9CE,
+  'primary-2': #2DA1AD,
+  'primary-3': #2496A2,
+  'secondary-1': #FFF,
+  'secondary-2': #EAEAEA,
+  'secondary-3': #E3E3E3,
+  'secondary-4': #BBC4C3,
+  'lighten-1': rgba(0, 0, 0, 0.20000000298023224),
+  'lighten-2': rgba(#BBC4C3, 0.4000000059604645),
+  'lighten-3': rgba(#BBC4C3, 0.30000001192092896));
+
+// fallback if want to ditch IE for css vars
+:root {
+
+  @each $prop,
+  $val in $colors {
+    --#{$prop}: #{$val};
+  }
+}
+
+// TODO: check this and seperate it where it belongs
+// https://codyhouse.co/blog/post/css-custom-properties-vs-sass-variables
+[data-theme="default"] {
+  // --stavis-varijable: ovdje;
+  //<section data-theme="dark"> </section>
+}
+
+[data-theme="dark"] {
+  // --stavis-varijable: ovdje;
+  //<section data-theme="dark"> </section>
+}

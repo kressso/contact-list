@@ -1,0 +1,67 @@
+* {
+  font-family: $primary-font;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+// wrapper for grid and items
+.base-wrap {
+  margin: 0 auto;
+  padding: 0 calc-rem($wrapper-xsmall--padding);
+  max-width: calc-rem($global-wrap--width);
+
+  @include mq(w400) {}
+
+  @include mq(w480) {
+    padding: 0 calc-rem($wrapper-small--padding);
+  }
+
+  @include mq(w560) {}
+
+  @include mq(w640) {}
+
+  @include mq(w768) {}
+
+  @include mq(w992) {}
+
+  @include mq(w1200) {
+    padding: 0 calc-rem($wrapper-medium--padding);
+  }
+
+  @include mq(w1440) {
+    padding: 0;
+  }
+
+  @include mq(w1600) {}
+
+  @include mq(w1740) {}
+
+  @include mq(w1920) {}
+
+  @include mq(w2160) {}
+
+  @include mq(w2560) {}
+}

@@ -1,0 +1,107 @@
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+p,
+.p {
+  font-family: $primary-font;
+  color: getColor('secondary-4');
+}
+
+
+h1,
+.h1 {
+  $h1--font-size: 28px;
+  $h1--line-height: 34px;
+  @include full-font-style($h1--font-size, $h1--line-height);
+}
+
+h2,
+.h2 {
+  $h2--font-size: 21px;
+  $h2--line-height: 28px;
+  @include full-font-style($h2--font-size, $h2--line-height);
+}
+
+h3,
+.h3 {
+  $h3--font-size: 18px;
+  $h3--line-height: 22px;
+  @include full-font-style($h3--font-size, $h3--line-height);
+}
+
+h4,
+.h4 {
+  //
+}
+
+h5,
+.h5 {
+  //
+}
+
+p,
+.p {
+  $p--font-size: 16px;
+  $p--line-height: 20px;
+  @include full-font-style($p--font-size, $p--line-height);
+
+  &.small {
+    $p-small--font-size: 14px;
+    $p-small--line-height: 18px;
+    @include full-font-style($p-small--font-size, $p-small--line-height);
+  }
+}
+
+.bold,
+.bold span {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.font--lato {
+  font-family: $primary-font;
+}
+
+.text-link {
+  // color: getColor('secondary-b', '800');
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.text--14-18 {
+  @include full-font-style(14px, 18px);
+
+  @include mq(w768) {}
+
+  @include mq(w992) {
+    @include full-font-style(16px, 20px);
+  }
+
+  @include mq(w1200) {
+    @include full-font-style(18px, 22px);
+  }
+}
+
+.text--21-28 {
+  @include full-font-style(21px, 28px);
+
+  @include mq(w768) {}
+
+  @include mq(w992) {
+    @include full-font-style(24px, 30px);
+  }
+
+  @include mq(w1200) {
+    @include full-font-style(28px, 34px);
+  }
+}

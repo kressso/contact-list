@@ -1,23 +1,56 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
+import Contacts from '../views/contacts/Contacts.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'contacts',
+    component: Contacts,
+    redirect: '/all',
+    children: [
+      {
+        path: '/all',
+        name: 'contacts-all',
+        component: () => import(/* webpackChunkName: "contacts-all" */ '../views/contacts/ContactsAll.vue')
+      },
+      {
+        path: '/favorites',
+        name: 'favorites',
+        component: () => import(/* webpackChunkName: "favorites" */ '../views/contacts/ContactsFavorites.vue')
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/user/:id',
+    name: 'user-single',
+    component: () => import(/* webpackChunkName: "user-single" */ '../views/user/UserSingle.vue')
+  },
+  {
+    path: '/user/:id/edit',
+    name: 'user-edit',
+    component: () => import(/* webpackChunkName: "user-edit" */ '../views/user/UserEdit.vue')
+  },
+  {
+    path: '/add-new',
+    name: 'add-new',
+    component: () => import(/* webpackChunkName: "add-new" */ '../views/user/UserAddNew.vue'),
+  },
+  {
+    path: '*',
+    name: 'error',
+    component: () => import(/* webpackChunkName: "error" */ '../views/Error.vue')
   }
+
+
+  // contacts / all
+  // contacts / favorites
+  // user / :id
+  // user / :id / edit
+  // user / add-new
 ]
 
 const router = new VueRouter({

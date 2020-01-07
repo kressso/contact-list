@@ -1,0 +1,86 @@
+/*
+*
+* color function
+*
+*/
+@function getColor($color, $shade: '100', $map : $colors) {
+
+  // check color exists
+  @if (map-has-key($map, $color)) {
+    $value: map-get($map, unquote($color));
+
+    // check if color or map
+    @if type-of($value)==color {
+      // return color
+      @return $value;
+    }
+
+    // check shade of color exists
+    @if (map-has-key($value, $shade)) {
+      // return shade of color
+      @return map-get($value, $shade);
+    }
+  }
+
+  // else do nothing
+  @return null;
+}
+
+
+/*
+*
+* get unitless value for lineheign
+* font-size: 32px;
+* line-height: 1.2; // line height gets calculated as (32 * 1.2) => 38.4px
+*
+*/
+@function get-line-height($font-size, $line-height) {
+  @return $line-height / $font-size;
+}
+
+/*
+*
+* get rem from pixels, presume html default is 16px
+*
+*/
+$browser-context: 16px;
+
+// REM
+@function calc-rem($size, $context: $browser-context) {
+  $rem-size: $size / $context;
+  @return #{$rem-size}rem;
+}
+
+// EM
+@function calc-em($size, $context: $browser-context) {
+  $em-size: $size / $context;
+  @return #{$em-size}em;
+}
+
+/*
+*
+* tracking all z-indexes on page
+* usage: z-index: z('site-header')
+* z-index is the name position in map reversed $z-indexes.length is first element
+*
+*/
+@function z($name) {
+  @if index($z-indexes, $name) {
+    @return (length($z-indexes) - index($z-indexes, $name))+1;
+  }
+
+  @else {
+    @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+    @return null;
+  }
+}
+
+// breakpoint var (first in array is the largest number, etc array.length)
+$z-indexes: ("outdated-browser",
+  "modal",
+  "sidebar",
+  "site-header",
+  "page-wrapper",
+  "site-footer",
+  "button-gradient"  
+);
