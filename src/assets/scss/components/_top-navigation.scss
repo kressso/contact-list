@@ -1,0 +1,47 @@
+.header {
+  &__nav {
+    border-bottom: 1px solid getColor("secondary-4");
+
+    .svg-icon {
+      cursor: pointer;
+    }
+
+    .icons-wrap {
+      position: relative;
+      height: calc-rem(50px);
+      margin: 0 auto;
+      width: 87%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .svg-icon__arrow-back {
+        position: absolute;
+        left: 0;
+        margin-left: calc-rem(4px);
+      }
+    }
+
+    .icons-right {
+      svg {
+        &:not(:first-child) {
+          margin-left: calc-rem(34px);
+        }
+      }
+    }
+  }
+
+  @include mq(w640) {
+    &__nav {
+      .icons-wrap {
+        height: calc-rem(60px);
+      }
+    }
+  }
+
+  @include mq(w992) {
+    &__nav {
+      display: none;
+    }
+  }
+}

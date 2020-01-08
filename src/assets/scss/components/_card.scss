@@ -8,6 +8,7 @@
   background-color: getColor('secondary-1');
   min-height: calc-rem(60px);
   transition: border-color $global-transition;
+  cursor: pointer;
 
   &:hover {
     border-color: getColor('primary-2');
@@ -45,10 +46,10 @@
     }
   }
 
-  .is-favorite {
-    fill: getColor('secondary-3');
-    stroke: getColor('secondary-3');
-  }
+  // .is-favorite {
+  //   fill: getColor('secondary-3');
+  //   stroke: getColor('secondary-3');
+  // }
 
   &-add {
     min-height: calc-rem(60px);

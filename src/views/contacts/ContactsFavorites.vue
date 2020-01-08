@@ -1,9 +1,12 @@
 <template>
   <div class="contacts">
+    <ClInputSearch @change="searchEmit" />
     <section class="section-1 base-wrap">
-      <h2 v-if="favoriteUsers.length === 0">No favorite users</h2>
+      <h2 v-if="this.$store.getters.getFavUsers.length === 0">
+        No favorite users
+      </h2>
       <div v-else class="grid-wrap">
-        <template v-for="user in favoriteUsers">
+        <template v-for="user in filteredContent">
           <ClCardContact :user="user" :key="user.id">
             {{ user.fullName }}
           </ClCardContact>
@@ -18,14 +21,26 @@ export default {
   name: "ClContactFavorites",
   data() {
     return {
-      // favoriteUsers: []
+      search: ""
     };
   },
   computed: {
-    favoriteUsers() {
-      return this.$store.state.users.filter(user => user.isFavorite);
+    filteredContent() {
+      let filtered = this.$store.getters.getFavUsers;
+
+      if (this.search) {
+        filtered = this.$store.getters.getFavUsers.filter(
+          x => x.fullName.toLowerCase().indexOf(this.search) > -1
+        );
+      }
+
+      return filtered;
     }
   },
-  created() {}
+  methods: {
+    searchEmit(val) {
+      this.search = val;
+    }
+  }
 };
 </script>

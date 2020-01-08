@@ -1,6 +1,6 @@
 <template>
   <div class="contacts">
-    <form class="form">
+    <!-- <form class="form">
       <label class="label"
         ><ClSvgSearch />
         <input
@@ -11,7 +11,9 @@
           v-model="search"
         />
       </label>
-    </form>
+    </form> -->
+    <ClInputSearch @change="searchEmit" />
+
     <section class="section-1 base-wrap">
       <div class="grid-wrap">
         <ClCardContact add-new></ClCardContact>
@@ -47,9 +49,9 @@ export default {
     }
   },
   methods: {
-    // openSingleUser(id) {
-    //   this.$router.push(`/user/${id}`);
-    // }
+    searchEmit(val) {
+      this.search = val;
+    }
   }
 };
 </script>

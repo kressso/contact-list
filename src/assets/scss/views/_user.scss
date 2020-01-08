@@ -1,34 +1,51 @@
 .user-single {
-  &__nav {
-    border-bottom: 1px solid getColor('secondary-4');
 
-    .icons-wrap {
-      height: calc-rem(50px);
-      margin: 0 auto;
-      width: 87%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .icons-right {
-      svg {
-        &:not(:first-child) {
-          margin-left: calc-rem(34px);
-        }
-      }
+  // &__nav,
+  &__header {
+    .svg-icon {
+      cursor: pointer;
     }
   }
+
+  // &__nav {
+  //   border-bottom: 1px solid getColor('secondary-4');
+
+  //   .icons-wrap {
+  //     height: calc-rem(50px);
+  //     margin: 0 auto;
+  //     width: 87%;
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: space-between;
+
+  //     .svg-icon__arrow-back {
+  //       margin-left: calc-rem(4px);
+  //     }
+  //   }
+
+  //   .icons-right {
+  //     svg {
+  //       &:not(:first-child) {
+  //         margin-left: calc-rem(34px);
+  //       }
+  //     }
+  //   }
+  // }
 
   &__header {
     height: calc-rem(100px);
     display: flex;
     align-items: center;
-    // justify-content: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: 0 auto calc-rem(24px);
     width: 87%;
     border-bottom: 1px solid getColor('primary-2');
+
+    &--visibility {
+      .svg-icon {
+        display: none;
+      }
+    }
 
     .icons-left {
       display: flex;
@@ -56,7 +73,7 @@
   &__data {
     width: 87%;
     margin: 0 auto;
-    padding: 0 calc-rem(25px);
+    // padding: 0 calc-rem(25px);
 
     .data-wrap {
       margin-bottom: calc-rem(50px);
@@ -85,6 +102,7 @@
 
       &__single {
         margin-bottom: calc-rem(28px);
+        display: flex;
 
         p {
           display: inline-block;
@@ -92,6 +110,8 @@
           &:first-child {
             text-transform: uppercase;
             width: calc-rem(94px);
+            min-width: calc-rem(94px);
+            margin-right: 14px;
           }
 
           &:nth-child(2) {
@@ -99,6 +119,12 @@
           }
         }
       }
+    }
+  }
+
+  @media screen and (min-width: calc-em(375px)) {
+    &__data {
+      padding: 0 calc-rem(25px);
     }
   }
 
@@ -147,18 +173,21 @@
       top: 60px;
     }
 
-    .icons-wrap {
-      display: none;
-    }
+    // &__nav {
+    //   display: none;
+    // }
 
     &__header {
+      justify-content: space-between;
       height: calc-rem(150px);
       align-items: flex-end;
       padding-bottom: calc-rem(27px);
       margin-bottom: calc-rem(64px);
 
-      &.mobile {
-        // display: none;
+      &--visibility {
+        .svg-icon {
+          display: inline-block;
+        }
       }
 
       .icons-right {

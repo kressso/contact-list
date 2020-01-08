@@ -12,19 +12,8 @@
 .label {
   position: relative;
   width: 100%;
-  height: calc-rem(50px);
+  // height: calc-rem(50px);
   max-width: calc-rem(540px);
-
-  svg {
-    position: absolute;
-    top: 50%;
-    left: calc-rem(24px);
-    transform: translateY(-50%);
-  }
-
-  @include mq(w992) {
-    height: calc-rem(60px)
-  }
 }
 
 .search {

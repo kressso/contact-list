@@ -1,16 +1,8 @@
 <template>
   <div class="user-single">
     <div class="img-desktop"></div>
-    <div class="user-single__nav">
-      <div class="icons-wrap">
-        <ClSvgArrowBack @click.native="handleClick($event)" />
-        <div class="icons-right">
-          <ClSvgHart @click.native="handleClick($event)" />
-          <ClSvgEdit @click.native="handleClick($event)" />
-        </div>
-      </div>
-    </div>
-    <div class="user-single__header mobile">
+    <ClTopNavigation :user="singleUser" />
+    <div class="user-single__header user-single__header--visibility">
       <div class="img"></div>
       <div class="icons-left">
         <ClSvgArrowBack @click.native="handleClick($event)" />
@@ -43,19 +35,6 @@
             <p class="p small">{{ item.place }}</p>
             <p>{{ item.phone }}</p>
           </div>
-
-          <!-- <div class="field__single">
-            <p class="p small">WORK</p>
-            <p>+385 21 546 456</p>
-          </div>
-          <div class="field__single">
-            <p class="p small">CELL</p>
-            <p>+385 21 546 456</p>
-          </div>
-          <div class="field__single">
-            <p class="p small">HUSBAND</p>
-            <p>+385 21 546 456</p>
-          </div> -->
         </div>
       </div>
     </div>
@@ -74,6 +53,12 @@ export default {
     handleClick() {
       console.log("kliknuto");
       this.$emit("click", event);
+    },
+    toggleFavorite() {
+      this.$store.commit("toggleFavorite", this.singleUser._id);
+    },
+    redirectBack() {
+      this.$router.go(-1);
     }
   },
   created() {

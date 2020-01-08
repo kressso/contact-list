@@ -1,6 +1,19 @@
 .contacts {
   padding-top: calc-rem(24px);
 
+  .label {
+    position: relative;
+    width: 100%;
+    max-width: calc-rem(540px);
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: calc-rem(24px);
+      transform: translateY(-50%);
+    }
+  }
+
   .section-1 {
     margin-bottom: calc-rem(70px);
   }

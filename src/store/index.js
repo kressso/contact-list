@@ -153,6 +153,9 @@ export default new Vuex.Store({
   getters: {
     getSingleUser: (state) => (id) => {
       return state.users.find(user => user._id === id)
+    },
+    getFavUsers: (state) => {
+      return state.users.filter(user => user.isFavorite);
     }
   },
   mutations: {

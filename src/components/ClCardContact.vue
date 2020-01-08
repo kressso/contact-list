@@ -3,7 +3,7 @@
     v-if="!addNew"
     class="card"
     :class="clazz"
-    @click="openSingleUser(user._id)"
+    @click.stop="openSingleUser(user._id)"
   >
     <div class="img">
       <slot name="img"></slot>
@@ -11,11 +11,11 @@
     <p class="name text--14-18 bold"><slot>No name entered</slot></p>
     <div class="icons">
       <ClSvgHart
-        @click.native="toggleFavorite($event)"
+        @click.native.stop="toggleFavorite($event)"
         :class="{ 'is-favorite': user.isFavorite }"
       />
-      <ClSvgEdit @click.native="editUser($event)" />
-      <ClSvgTrash @click.native="deleteUser($event)" />
+      <ClSvgEdit @click.native.stop="editUser($event)" />
+      <ClSvgTrash @click.native.stop="deleteUser($event)" />
     </div>
   </div>
   <div v-else-if="addNew" class="card card-add" @click="addNewRoute($event)">

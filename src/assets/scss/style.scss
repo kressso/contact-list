@@ -22,7 +22,9 @@
 
 
 // components
+@import "./components/shared";
 @import "./components/header";
+@import "./components/top-navigation";
 @import "./components/tab-navigation";
 @import "./components/button";
 @import "./components/card";
