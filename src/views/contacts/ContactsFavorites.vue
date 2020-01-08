@@ -2,8 +2,11 @@
   <div class="contacts">
     <ClInputSearch @change="searchEmit" />
     <section class="section-1 base-wrap">
-      <h2 v-if="this.$store.getters.getFavUsers.length === 0">
-        No favorite users
+      <h2
+        v-if="$store.getters.getFavUsers.length === 0"
+        class="contacts--msg-no"
+      >
+        No favorite contacts
       </h2>
       <div v-else class="grid-wrap">
         <template v-for="user in filteredContent">

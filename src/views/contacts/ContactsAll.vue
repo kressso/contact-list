@@ -1,17 +1,5 @@
 <template>
   <div class="contacts">
-    <!-- <form class="form">
-      <label class="label"
-        ><ClSvgSearch />
-        <input
-          type="text"
-          aria-label="Search"
-          name="firstname"
-          class="search"
-          v-model="search"
-        />
-      </label>
-    </form> -->
     <ClInputSearch @change="searchEmit" />
 
     <section class="section-1 base-wrap">

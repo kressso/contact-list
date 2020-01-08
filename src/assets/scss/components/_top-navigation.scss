@@ -42,6 +42,11 @@
   @include mq(w992) {
     &__nav {
       display: none;
+
+      .icons-wrap {
+        width: calc-rem(630px);
+      }
+
     }
   }
 }

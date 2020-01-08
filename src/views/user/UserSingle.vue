@@ -5,11 +5,14 @@
     <div class="user-single__header user-single__header--visibility">
       <div class="img"></div>
       <div class="icons-left">
-        <ClSvgArrowBack @click.native="handleClick($event)" />
+        <ClSvgArrowBack @click.native="redirectBack($event)" />
         <p class="name text--21-28 bold">{{ this.singleUser.fullName }}</p>
       </div>
       <div class="icons-right">
-        <ClSvgHart @click.native="handleClick($event)" />
+        <ClSvgHart
+          @click.native="toggleFavorite($event)"
+          :class="{ 'is-favorite': singleUser.isFavorite }"
+        />
         <ClSvgEdit @click.native="handleClick($event)" />
       </div>
     </div>
@@ -51,7 +54,6 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log("kliknuto");
       this.$emit("click", event);
     },
     toggleFavorite() {
@@ -63,7 +65,6 @@ export default {
   },
   created() {
     this.singleUser = this.$store.getters.getSingleUser(this.$route.params.id);
-    console.log("router1 ", this.singleUser);
   }
 };
 </script>

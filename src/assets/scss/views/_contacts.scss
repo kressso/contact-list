@@ -1,6 +1,10 @@
 .contacts {
   padding-top: calc-rem(24px);
 
+  &--msg-no {
+    text-align: center;
+  }
+
   .label {
     position: relative;
     width: 100%;

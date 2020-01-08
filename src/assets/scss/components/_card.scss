@@ -46,11 +46,6 @@
     }
   }
 
-  // .is-favorite {
-  //   fill: getColor('secondary-3');
-  //   stroke: getColor('secondary-3');
-  // }
-
   &-add {
     min-height: calc-rem(60px);
     border: none;
@@ -64,10 +59,13 @@
     svg {
       margin-right: calc-rem(18px);
       margin-left: calc-rem(12px);
+      fill: getColor('primary-2');
+      opacity: 50%;
     }
 
     &__title {
       color: getColor('primary-2');
+      opacity: 50%;
     }
   }
 
@@ -122,7 +120,7 @@
         margin: 0 0 calc-rem(11px);
       }
 
-      &__title {
+      &__title.small {
         font-size: calc-rem(16px);
       }
     }

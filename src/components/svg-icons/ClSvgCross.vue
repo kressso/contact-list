@@ -1,7 +1,7 @@
 <template>
   <svg
-    width="18"
-    height="18"
+    :width="width"
+    :height="height"
     viewBox="0 0 18 18"
     xmlns="http://www.w3.org/2000/svg"
     :class="clazz"
@@ -9,8 +9,8 @@
   >
     <path
       d="M9.818 8.182V0H8.182v8.182H0v1.636h8.182V18h1.636V9.818H18V8.182z"
-      fill="#2DA1AD"
       fill-rule="nonzero"
+      class="svg-icon__cross--inner"
     />
   </svg>
 </template>
@@ -27,6 +27,14 @@ export default {
     degree: {
       type: Number,
       default: 0
+    },
+    width: {
+      type: Number,
+      default: 18
+    },
+    height: {
+      type: Number,
+      default: 18
     }
   },
   computed: {
