@@ -1,5 +1,10 @@
 <template>
-  <div v-if="!addNew" class="card" :class="clazz">
+  <div
+    v-if="!addNew"
+    class="card"
+    :class="clazz"
+    @click="openSingleUser(user._id)"
+  >
     <div class="img">
       <slot name="img"></slot>
     </div>
@@ -45,18 +50,19 @@ export default {
   },
   methods: {
     toggleFavorite() {
-      console.log("kliknuto ", this.user._id);
       this.$store.commit("toggleFavorite", this.user._id);
     },
     deleteUser() {
       this.$store.commit("deleteUser", this.user._id);
     },
     editUser() {
-      console.log("ruta za edit");
-      // this.$router.push("/add-new");
+      this.$router.push(`/user/${this.user._id}/edit`);
     },
     addNewRoute() {
       this.$router.push("/add-new");
+    },
+    openSingleUser(id) {
+      this.$router.push(`/user/${id}`);
     }
   }
 };

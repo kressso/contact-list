@@ -17,7 +17,7 @@
         <ClCardContact add-new></ClCardContact>
 
         <template v-for="user in filteredContent">
-          <ClCardContact :user="user" :key="user.id">
+          <ClCardContact :user="user" :key="user._id">
             {{ user.fullName }}
           </ClCardContact>
         </template>
@@ -46,7 +46,11 @@ export default {
       return filtered;
     }
   },
-  methods: {}
+  methods: {
+    // openSingleUser(id) {
+    //   this.$router.push(`/user/${id}`);
+    // }
+  }
 };
 </script>
 

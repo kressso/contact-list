@@ -2,24 +2,12 @@
   fill: getColor('secondary-4');
   transition: fill $global-transition, stroke $global-transition;
 
-  &:hover {
-    fill: getColor('secondary-3');
-  }
-
   &__hart {
     fill: transparent;
     stroke: getColor('secondary-4');
 
-    &:hover {
-      stroke: getColor('secondary-3');
-    }
-
     &--filled {
       fill: getColor('secondary-4');
-
-      &:hover {
-        fill: getColor('secondary-3');
-      }
     }
   }
 }
