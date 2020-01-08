@@ -3,7 +3,7 @@
   @include full-font-style(14px, 18px);
   padding: calc-rem(11px) calc-rem(30px);
   height: calc-rem($btn-height);
-  min-width: calc-rem(160px);
+  min-width: calc-rem(140px);
   color: getColor('secondary-1');
   font-family: $primary-font;
   font-weight: 700;
@@ -101,5 +101,9 @@
     // pointer-events: none;
     background-color: var(--secondary-4);
     color: var(--secondary-3);
+  }
+
+  @media screen and (min-width: calc-em(375px)) {
+    min-width: calc-rem(160px);
   }
 }

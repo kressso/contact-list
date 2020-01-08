@@ -68,6 +68,10 @@
           >
         </div>
       </form>
+      <div class="btn__wrap">
+        <ClButton color="secondary" @click.native="redirectBack($event)">Cancel</ClButton>
+        <ClButton>Save</ClButton>
+      </div>
     </div>
     <pre>{{ form }}</pre>
   </div>
