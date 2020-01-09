@@ -10,4 +10,12 @@
       fill: getColor('secondary-4');
     }
   }
+
+  &__mail {
+    margin-top: calc-rem(2px);
+  }
+
+  &__person {
+    margin-top: calc-rem(-1px);
+  }
 }

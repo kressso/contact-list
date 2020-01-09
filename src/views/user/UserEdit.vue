@@ -1,14 +1,44 @@
 <template>
   <div class="user-single user-add-new">
-    <div class="img-desktop"></div>
-    <ClTopNavigation :fav-btn="false" :edit-btn="false" />
+    <div
+      class="img-desktop"
+      :class="{ 'img--remove': image, 'img--add': !image }"
+    >
+      <div v-if="!image">
+        <label for="upload"><ClSvgUpload /></label>
+        <input id="upload" type="file" @change="onFileChange" />
+      </div>
+      <div v-else>
+        <ClSvgRemove @click.native="removeImage" />
+      </div>
+      <img v-if="image" :src="image" />
+    </div>
+
+    <ClTopNavigation :fav-btn="false" :edit-btn="false" :delBtn="true" />
+
     <div class="user-single__header user-single__header--visibility">
-      <div class="img">
-        <ClSvgUpload />
+      <div
+        class="img-mobile"
+        :class="{ 'img--remove': image, 'img--add': !image }"
+      >
+        <div v-if="!image">
+          <label for="upload"><ClSvgUpload /></label>
+          <input id="upload" type="file" @change="onFileChange" />
+        </div>
+        <div v-else>
+          <ClSvgRemove @click.native="removeImage" />
+        </div>
+        <img v-if="image" :src="image" />
       </div>
       <div class="icons-left">
         <ClSvgArrowBack @click.native="redirectBack($event)" />
-        EDIT je OVO
+      </div>
+      <div
+        class="icons-right icons-right--del-position"
+        @click="deleteUser($event)"
+      >
+        Delete
+        <ClSvgTrash />
       </div>
     </div>
 
@@ -67,7 +97,10 @@
         </div>
       </form>
       <div class="btn__wrap">
-        <ClButton color="secondary" @click.native="redirectBack($event)"
+        <ClButton
+          color="secondary"
+          type="button"
+          @click.native="redirectBack($event)"
           >Cancel</ClButton
         >
         <ClButton @click.native="saveUser($event)">Save</ClButton>
@@ -78,16 +111,21 @@
 </template>
 
 <script>
+import mixins from "@/utils/mixins";
+
 export default {
   name: "ClUserEdit",
+  mixins: [mixins],
   data() {
     return {
       singleUser: {},
+      image: "",
       form: {
         // _id: "",
         fullName: String,
         email: String,
         isFavorite: Boolean,
+        image: "",
         numbers: [
           {
             phone: String,
@@ -99,11 +137,29 @@ export default {
     };
   },
   methods: {
-    handleClick() {
-      console.log("dasdasd");
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      /*eslint-disable-next-line */
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = e => {
+        vm.image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
+    removeImage() {
+      this.image = "";
     },
     redirectBack() {
-      this.$router.go(-1);
+      this.$router.push(`/user/${this.$route.params.id}`);
     },
     addNewNumberField() {
       // prevent to add another field if last one is empty
@@ -119,13 +175,20 @@ export default {
       });
     },
     saveUser() {
-      console.log("daj ", this.form);
-      // this.$store.commit("saveEditedUser", this.form);
-      // this.$router.push(`/all`);
+      this.form.image = this.image;
+      this.$store.commit("saveEditedUser", this.form);
+      this.$router.push(`/user/${this.$route.params.id}`);
+    },
+    deleteUser() {
+      this.$store.commit("deleteUser", this.$route.params.id);
+      this.$router.push(`/all`);
     }
   },
   created() {
     this.form = this.$store.getters.getSingleUser(this.$route.params.id);
+    if (this.form.image) {
+      this.image = this.form.image;
+    }
   }
 };
 </script>

@@ -1,12 +1,9 @@
 <template>
   <div id="app">
     <ClHeader />
-    <!-- <ClTabNavigation /> -->
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
-    <router-view />
+    <transition name="slide-fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 

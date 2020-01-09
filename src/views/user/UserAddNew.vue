@@ -1,10 +1,34 @@
 <template>
   <div class="user-single user-add-new">
-    <div class="img-desktop"></div>
+    <div
+      class="img-desktop"
+      :class="{ 'img--remove': image, 'img--add': !image }"
+    >
+      <div v-if="!image">
+        <label for="upload"><ClSvgUpload /></label>
+        <input id="upload" type="file" @change="onFileChange" />
+      </div>
+      <div v-else>
+        <ClSvgRemove @click.native="removeImage" />
+      </div>
+      <img v-if="image" :src="image" />
+    </div>
+
     <ClTopNavigation :fav-btn="false" :edit-btn="false" />
+
     <div class="user-single__header user-single__header--visibility">
-      <div class="img">
-        <ClSvgUpload />
+      <div
+        class="img-mobile"
+        :class="{ 'img--remove': image, 'img--add': !image }"
+      >
+        <div v-if="!image">
+          <label for="upload"><ClSvgUpload /></label>
+          <input id="upload" type="file" @change="onFileChange" />
+        </div>
+        <div v-else>
+          <ClSvgRemove @click.native="removeImage" />
+        </div>
+        <img v-if="image" :src="image" />
       </div>
       <div class="icons-left">
         <ClSvgArrowBack @click.native="redirectBack($event)" />
@@ -84,6 +108,7 @@ export default {
   name: "ClUserAddNew",
   data() {
     return {
+      image: "",
       form: {
         _id:
           Math.random()
@@ -106,11 +131,27 @@ export default {
     };
   },
   methods: {
-    handleClick() {
-      // console.log("dasdasd");
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      /*eslint-disable-next-line */
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = e => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    removeImage() {
+      this.image = "";
     },
     redirectBack() {
-      this.$router.go(-1);
+      this.$router.push(`/all`);
     },
     addNewNumberField() {
       // prevent to add another field if last one is empty
@@ -126,7 +167,8 @@ export default {
       });
     },
     saveUser() {
-      this.$store.commit("saveUser", this.form);
+      this.form.image = this.image;
+      this.$store.commit("saveNewUser", this.form);
       this.$router.push(`/all`);
     }
   },

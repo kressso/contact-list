@@ -6,7 +6,7 @@
     @click.stop="openSingleUser(user._id)"
   >
     <div class="img">
-      <slot name="img"></slot>
+      <img v-if="user.image" :src="user.image" :alt="user.fullName" />
     </div>
     <p class="name text--14-18 bold"><slot>No name entered</slot></p>
     <div class="icons">

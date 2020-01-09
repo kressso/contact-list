@@ -8,7 +8,8 @@
           @click.native="toggleFavorite($event)"
           :class="{ 'is-favorite': user.isFavorite }"
         />
-        <ClSvgEdit v-if="editBtn" @click.native="handleClick($event)" />
+        <ClSvgEdit v-if="editBtn" @click.native="editUser($event)" />
+        <ClSvgTrash v-if="delBtn" @click.native="deleteUser($event)" />
       </div>
     </div>
   </div>
@@ -35,14 +36,29 @@ export default {
     editBtn: {
       type: Boolean,
       default: true
+    },
+    delBtn: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
+    redirectBack() {
+      if (this.delBtn) {
+        this.$router.push(`/user/${this.$route.params.id}`);
+      } else {
+        this.$router.push("/all");
+      }
+    },
     toggleFavorite() {
       this.$store.commit("toggleFavorite", this.user._id);
     },
-    redirectBack() {
-      this.$router.go(-1);
+    editUser() {
+      this.$router.push(`/user/${this.user._id}/edit`);
+    },
+    deleteUser() {
+      this.$store.commit("deleteUser", this.$route.params.id);
+      this.$router.push("/all");
     }
   }
 };

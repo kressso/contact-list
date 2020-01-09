@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    LOGO SVG, pazi razmak od dna zbog linije one!
+    <ClSvgLogo />
     <div class="header__btm-line"></div>
   </div>
 </template>

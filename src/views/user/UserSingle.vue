@@ -1,9 +1,21 @@
 <template>
   <div class="user-single">
-    <div class="img-desktop"></div>
+    <div class="img-desktop">
+      <img
+        v-if="singleUser.image"
+        :src="singleUser.image"
+        :alt="singleUser.fullName"
+      />
+    </div>
     <ClTopNavigation :user="singleUser" />
     <div class="user-single__header user-single__header--visibility">
-      <div class="img"></div>
+      <div class="img-mobile">
+        <img
+          v-if="singleUser.image"
+          :src="singleUser.image"
+          :alt="singleUser.fullName"
+        />
+      </div>
       <div class="icons-left">
         <ClSvgArrowBack @click.native="redirectBack($event)" />
         <p class="name text--21-28 bold">{{ this.singleUser.fullName }}</p>
@@ -13,9 +25,10 @@
           @click.native="toggleFavorite($event)"
           :class="{ 'is-favorite': singleUser.isFavorite }"
         />
-        <ClSvgEdit @click.native="handleClick($event)" />
+        <ClSvgEdit @click.native="editUser($event)" />
       </div>
     </div>
+    <img src="" alt="" />
     <div class="user-single__data">
       <div class="data-wrap">
         <p class="label">
@@ -60,7 +73,10 @@ export default {
       this.$store.commit("toggleFavorite", this.singleUser._id);
     },
     redirectBack() {
-      this.$router.go(-1);
+      this.$router.push(`/all`);
+    },
+    editUser() {
+      this.$router.push(`/user/${this.singleUser._id}/edit`);
     }
   },
   created() {

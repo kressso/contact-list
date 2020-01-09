@@ -24,6 +24,12 @@
     border-radius: 50%;
     border: calc-rem(3px) solid getColor('lighten-3');
     margin-right: calc-rem(25px);
+    overflow: hidden;
+
+    img {
+      width: calc-rem(40px);
+      height: calc-rem(40px);
+    }
   }
 
   .name {
@@ -88,6 +94,11 @@
       height: calc-rem(66px);
       margin-right: 0;
       margin-bottom: calc-rem(16px);
+
+      img {
+        width: calc-rem(60px);
+        height: calc-rem(60px);
+      }
     }
 
     .icons {
