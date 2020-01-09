@@ -15,14 +15,17 @@ export default new Vuex.Store({
         isFavorite: false,
         numbers: [
           {
+            id: 0,
             place: "Spokane",
             phone: "+1 (872) 477-2065"
           },
           {
+            id: 1,
             place: "Fairforest",
             phone: "+1 (936) 446-2344"
           },
           {
+            id: 2,
             place: "Whitestone",
             phone: "+1 (996) 465-2610"
           }
@@ -35,14 +38,17 @@ export default new Vuex.Store({
         isFavorite: true,
         numbers: [
           {
+            id: 0,
             place: "Fresno",
             phone: "+1 (910) 589-2207"
           },
           {
+            id: 1,
             place: "Gilgo",
             phone: "+1 (916) 582-3752"
           },
           {
+            id: 2,
             place: "Trucksville",
             phone: "+1 (996) 554-3548"
           }
@@ -55,14 +61,17 @@ export default new Vuex.Store({
         isFavorite: false,
         numbers: [
           {
+            id: 0,
             place: "Faxon",
             phone: "+1 (979) 402-2357"
           },
           {
+            id: 1,
             place: "Hendersonville",
             phone: "+1 (991) 444-3653"
           },
           {
+            id: 2,
             place: "Eden",
             phone: "+1 (971) 455-3856"
           }
@@ -75,14 +84,17 @@ export default new Vuex.Store({
         isFavorite: true,
         numbers: [
           {
+            id: 0,
             place: "Hartsville/Hartley",
             phone: "+1 (874) 511-2187"
           },
           {
+            id: 1,
             place: "Norris",
             phone: "+1 (825) 580-3770"
           },
           {
+            id: 2,
             place: "Bainbridge",
             phone: "+1 (822) 592-2394"
           }
@@ -95,14 +107,17 @@ export default new Vuex.Store({
         isFavorite: false,
         numbers: [
           {
+            id: 0,
             place: "Motley",
             phone: "+1 (806) 402-3857"
           },
           {
+            id: 1,
             place: "Eagleville",
             phone: "+1 (911) 515-3276"
           },
           {
+            id: 2,
             place: "Adamstown",
             phone: "+1 (971) 481-2955"
           }
@@ -115,14 +130,17 @@ export default new Vuex.Store({
         isFavorite: false,
         numbers: [
           {
+            id: 0,
             place: "Forestburg",
             phone: "+1 (991) 400-3891"
           },
           {
+            id: 1,
             place: "Accoville",
             phone: "+1 (900) 554-2542"
           },
           {
+            id: 2,
             place: "Williston",
             phone: "+1 (899) 572-3755"
           }
@@ -135,14 +153,17 @@ export default new Vuex.Store({
         isFavorite: false,
         numbers: [
           {
+            id: 0,
             place: "Worton",
             phone: "+1 (813) 410-3515"
           },
           {
+            id: 1,
             place: "Abiquiu",
             phone: "+1 (896) 558-2420"
           },
           {
+            id: 2,
             place: "Teasdale",
             phone: "+1 (900) 486-2361"
           }
@@ -170,6 +191,30 @@ export default new Vuex.Store({
       state.users = state.users.filter(x => {
         return x._id != payload;
       })
+    },
+    saveUser (state, payload) {
+      state.users.push(payload);
+    },
+    saveEditedUser (state, payload) {
+
+      state.users.forEach((x, index) => {
+        if (x._id === payload._id) {
+          console.log('index ', state.users[index]);
+          state.users[index] = { ...payload };
+          console.log('opaca ', state.users[index])
+        }
+      });
+
+
+      // state.users = state.users.filter(x => {
+      //   // console.log('eo1 ', x);
+      //   // console.log('eo2 ', payload);
+
+      //   if (x._id === payload._id) {
+      //     // state.users[_id]
+      //     console.log('jos to ', x);
+      //   }
+      // })
     }
   },
   actions: {

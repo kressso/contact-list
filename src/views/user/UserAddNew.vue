@@ -19,7 +19,7 @@
             class="input"
             id="name"
             type="text"
-            v-model="form.name"
+            v-model="form.fullName"
             placeholder="Full name"
           />
         </div>
@@ -48,17 +48,17 @@
               <input
                 class="input input__double--align-first"
                 type="number"
-                v-model="item.number"
+                v-model="item.phone"
                 placeholder="Number"
               />
               <div class="input__double--align-second">
                 <input
                   class="input"
                   type="text"
-                  v-model="item.label"
+                  v-model="item.place"
                   placeholder="Label"
                 />
-                <ClButtonAdd remove @click="removeField($event)" />
+                <ClButtonAdd remove @click="removeField($event, index)" />
               </div>
             </div>
           </div>
@@ -69,8 +69,10 @@
         </div>
       </form>
       <div class="btn__wrap">
-        <ClButton color="secondary" @click.native="redirectBack($event)">Cancel</ClButton>
-        <ClButton>Save</ClButton>
+        <ClButton color="secondary" @click.native="redirectBack($event)"
+          >Cancel</ClButton
+        >
+        <ClButton @click.native="saveUser($event)">Save</ClButton>
       </div>
     </div>
     <pre>{{ form }}</pre>
@@ -83,12 +85,21 @@ export default {
   data() {
     return {
       form: {
-        name: "",
+        _id:
+          Math.random()
+            .toString(36)
+            .substring(2, 15) +
+          Math.random()
+            .toString(36)
+            .substring(2, 15),
+        fullName: "",
         email: "",
+        isFavorite: false,
         numbers: [
           {
-            number: 123123123,
-            label: "Prviii"
+            phone: "",
+            place: "",
+            id: 0
           }
         ]
       }
@@ -96,27 +107,30 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log("dasdasd");
+      // console.log("dasdasd");
     },
     redirectBack() {
       this.$router.go(-1);
     },
     addNewNumberField() {
       // prevent to add another field if last one is empty
-
       this.form.numbers = this.form.numbers.filter(x => {
-        return x.number.length > 0 || x.label !== "";
+        return x.phone.length > 0 || x.place !== "";
       });
 
-      this.form.numbers.push({ number: "", label: "" });
+      this.form.numbers.push({ phone: "", place: "" });
     },
-    removeField(e) {
-      console.log("remove", e);
+    removeField(e, index) {
+      this.form.numbers = this.form.numbers.filter(x => {
+        return x.id !== index;
+      });
+    },
+    saveUser() {
+      this.$store.commit("saveUser", this.form);
+      this.$router.push(`/all`);
     }
   },
-  created() {
-    // this.singleUser = this.$store.getters.getSingleUser(this.$route.params.id);
-  }
+  created() {}
 };
 </script>
 
