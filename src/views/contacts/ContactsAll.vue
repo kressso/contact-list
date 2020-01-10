@@ -55,7 +55,6 @@ export default {
       this.activeUser = "";
     },
     deleteUserCard(userId) {
-      console.log("dosao emit", userId);
       this.activeUser = userId;
     },
     deleteUserModal() {
