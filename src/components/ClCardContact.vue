@@ -1,16 +1,24 @@
 <template>
-  <div v-if="!addNew" class="card" :class="clazz">
-    <div class="img">
-      <slot name="img"></slot>
+  <div
+    v-if="!addNew"
+    class="card"
+    :class="clazz"
+    @click.stop="openSingleUser(user._id)"
+  >
+    <div class="img" :class="{ 'img--missing': !user.image }">
+      <img v-if="user.image" :src="user.image" :alt="user.fullName" />
     </div>
     <p class="name text--14-18 bold"><slot>No name entered</slot></p>
     <div class="icons">
-      <ClSvgHart @click.native="handleClick($event)" />
-      <ClSvgEdit @click.native="handleClick($event)" />
-      <ClSvgTrash @click.native="handleClick($event)" />
+      <ClSvgHart
+        @click.native.stop="toggleFavorite($event)"
+        :class="{ 'is-favorite': user.isFavorite }"
+      />
+      <ClSvgEdit @click.native.stop="editUser($event)" />
+      <ClSvgTrash @click.native.stop="deleteUser($event)" />
     </div>
   </div>
-  <div v-else-if="addNew" class="card card-add" @click="handleClick($event)">
+  <div v-else-if="addNew" class="card card-add" @click="addNewRoute($event)">
     <ClSvgCross />
     <p class="card-add__title small">Add new</p>
   </div>
@@ -23,6 +31,14 @@ export default {
     addNew: {
       type: Boolean,
       default: false
+    },
+    user: {
+      type: Object,
+      default: () => ({})
+    },
+    isFavorite: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -33,9 +49,22 @@ export default {
     }
   },
   methods: {
-    handleClick() {
-      console.log("kliknuto");
-      this.$emit("click", event);
+    toggleFavorite() {
+      this.$store.commit("toggleFavorite", this.user._id);
+    },
+    deleteUser() {
+      // this.$store.commit("deleteUser", this.user._id);
+      this.$store.commit("toggleModal");
+      this.$emit("deleteuser", this.user._id);
+    },
+    editUser() {
+      this.$router.push(`/user/${this.user._id}/edit`);
+    },
+    addNewRoute() {
+      this.$router.push("/add-new");
+    },
+    openSingleUser(id) {
+      this.$router.push(`/user/${id}`);
     }
   }
 };

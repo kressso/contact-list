@@ -8,6 +8,7 @@
   background-color: getColor('secondary-1');
   min-height: calc-rem(60px);
   transition: border-color $global-transition;
+  cursor: pointer;
 
   &:hover {
     border-color: getColor('primary-2');
@@ -21,8 +22,18 @@
     width: calc-rem(46px);
     height: calc-rem(46px);
     border-radius: 50%;
-    border: calc-rem(3px) solid getColor('lighten-3');
+    border: calc-rem(3px) solid getColor('lighten-2');
     margin-right: calc-rem(25px);
+    overflow: hidden;
+
+    &--missing {
+      background-color: rgba(getColor('primary-1'), 0.4);
+    }
+
+    img {
+      width: calc-rem(40px);
+      height: calc-rem(40px);
+    }
   }
 
   .name {
@@ -46,6 +57,7 @@
   }
 
   &-add {
+    min-height: calc-rem(60px);
     border: none;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%232DA1AD' stroke-width='2' stroke-dasharray='6%2c6' stroke-dashoffset='4' stroke-linecap='round'/%3e%3c/svg%3e");
 
@@ -57,18 +69,15 @@
     svg {
       margin-right: calc-rem(18px);
       margin-left: calc-rem(12px);
+      fill: getColor('primary-2');
+      opacity: 50%;
     }
 
     &__title {
       color: getColor('primary-2');
+      opacity: 50%;
     }
   }
-
-  @include mq(w400) {}
-
-  @include mq(w480) {}
-
-  @include mq(w560) {}
 
   @include mq(w640) {
     flex-direction: column;
@@ -83,6 +92,11 @@
       height: calc-rem(66px);
       margin-right: 0;
       margin-bottom: calc-rem(16px);
+
+      img {
+        width: calc-rem(60px);
+        height: calc-rem(60px);
+      }
     }
 
     .icons {
@@ -109,12 +123,13 @@
 
     &-add {
       justify-content: center;
+      min-height: calc-rem(150px);
 
       svg {
         margin: 0 0 calc-rem(11px);
       }
 
-      &__title {
+      &__title.small {
         font-size: calc-rem(16px);
       }
     }
@@ -130,21 +145,16 @@
     }
   }
 
-  @include mq(w768) {}
+  @include mq(w992) {
 
-  @include mq(w992) {}
+    &-add {
+      min-height: calc-rem(153px);
+    }
+  }
 
-  @include mq(w1200) {}
-
-  @include mq(w1440) {}
-
-  @include mq(w1600) {}
-
-  @include mq(w1740) {}
-
-  @include mq(w1920) {}
-
-  @include mq(w2160) {}
-
-  @include mq(w2560) {}
+  @include mq(w1200) {
+    &-add {
+      min-height: calc-rem(154px);
+    }
+  }
 }

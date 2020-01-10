@@ -56,31 +56,3 @@ $browser-context: 16px;
   $em-size: $size / $context;
   @return #{$em-size}em;
 }
-
-/*
-*
-* tracking all z-indexes on page
-* usage: z-index: z('site-header')
-* z-index is the name position in map reversed $z-indexes.length is first element
-*
-*/
-@function z($name) {
-  @if index($z-indexes, $name) {
-    @return (length($z-indexes) - index($z-indexes, $name))+1;
-  }
-
-  @else {
-    @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
-    @return null;
-  }
-}
-
-// breakpoint var (first in array is the largest number, etc array.length)
-$z-indexes: ("outdated-browser",
-  "modal",
-  "sidebar",
-  "site-header",
-  "page-wrapper",
-  "site-footer",
-  "button-gradient"  
-);

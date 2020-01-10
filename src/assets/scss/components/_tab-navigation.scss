@@ -30,16 +30,6 @@
     }
   }
 
-  @include mq(w400) {}
-
-  @include mq(w480) {}
-
-  @include mq(w560) {}
-
-  @include mq(w640) {}
-
-  @include mq(w768) {}
-
   @include mq(w992) {
     height: calc-rem(90px);
   }
@@ -47,16 +37,4 @@
   @include mq(w1200) {
     height: calc-rem(120px);
   }
-
-  @include mq(w1440) {}
-
-  @include mq(w1600) {}
-
-  @include mq(w1740) {}
-
-  @include mq(w1920) {}
-
-  @include mq(w2160) {}
-
-  @include mq(w2560) {}
 }

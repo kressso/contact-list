@@ -3,7 +3,7 @@
   @include full-font-style(14px, 18px);
   padding: calc-rem(11px) calc-rem(30px);
   height: calc-rem($btn-height);
-  min-width: calc-rem(160px);
+  min-width: calc-rem(140px);
   color: getColor('secondary-1');
   font-family: $primary-font;
   font-weight: 700;
@@ -34,10 +34,75 @@
     }
   }
 
+  &__add {
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    -webkit-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 1px solid getColor('primary-2');
+    border-radius: 50%;
+    width: calc-rem(32px);
+    height: calc-rem(32px);
+    position: relative;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    .svg-icon__cross {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &--inner {
+        fill: getColor('primary-2');
+      }
+    }
+
+    &--position {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-size: calc-rem(14px);
+      color: getColor('primary-2');
+    }
+
+    &:not(.remove) {
+      margin-right: calc-rem(15px);
+    }
+
+    &.remove {
+      border-color: getColor('secondary-4');
+
+      .svg-icon__cross {
+        stroke: getColor('secondary-4');
+        transform-origin: top left;
+        transform: rotate(45deg) translate(-50%, -50%);
+
+        &--inner {
+          fill: getColor('secondary-4');
+        }
+      }
+    }
+  }
+
   &.disabled {
     cursor: not-allowed;
     // pointer-events: none;
     background-color: var(--secondary-4);
     color: var(--secondary-3);
+  }
+
+  @media screen and (min-width: calc-em(375px)) {
+    min-width: calc-rem(160px);
   }
 }

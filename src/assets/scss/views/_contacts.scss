@@ -1,6 +1,23 @@
 .contacts {
   padding-top: calc-rem(24px);
 
+  &--msg-no {
+    text-align: center;
+  }
+
+  .label {
+    position: relative;
+    width: 100%;
+    max-width: calc-rem(540px);
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: calc-rem(24px);
+      transform: translateY(-50%);
+    }
+  }
+
   .section-1 {
     margin-bottom: calc-rem(70px);
   }
@@ -23,18 +40,4 @@
   @include mq(w992) {
     padding-top: calc-rem(60px);
   }
-
-  @include mq(w1200) {}
-
-  @include mq(w1440) {}
-
-  @include mq(w1600) {}
-
-  @include mq(w1740) {}
-
-  @include mq(w1920) {}
-
-  @include mq(w2160) {}
-
-  @include mq(w2560) {}
 }

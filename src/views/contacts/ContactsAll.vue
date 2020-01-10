@@ -1,60 +1,65 @@
 <template>
   <div class="contacts">
-    <form class="form">
-      <input
-        type="text"
-        aria-label="Search"
-        name="firstname"
-        placeholder="ICON"
-        class="search"
-      />
-      <!-- <input
-        type="search"
-        aria-label="Search"
-        name="firstname"
-        placeholder="ICON"
-        class="search"
-      /> -->
-    </form>
+    <ClInputSearch @change="searchEmit" />
+
     <section class="section-1 base-wrap">
-      <!-- <ClButton @click="test"> Klik me </ClButton>
-    <ClButton @click="test" disabled> Klik me </ClButton>
-    <ClButton @click="test" color="secondary"> Klik me </ClButton> -->
-      <!-- <br />
-    <br />
-    <br /> -->
       <div class="grid-wrap">
-        <ClCardContact add-new @click="addNewRoute"></ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Denis Susac</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
-        <ClCardContact>Mirko Fodor</ClCardContact>
-        <ClCardContact>Ivan Delibasic</ClCardContact>
+        <ClCardContact add-new></ClCardContact>
+
+        <template v-for="user in filteredContent">
+          <ClCardContact
+            :user="user"
+            :key="user._id"
+            @deleteuser="deleteUserCard"
+          >
+            {{ user.fullName }}
+          </ClCardContact>
+        </template>
       </div>
     </section>
+
+    <ClModal
+      v-show="$store.state.showModal"
+      @close="cancelModalData"
+      @remove-user="deleteUserModal"
+    />
   </div>
 </template>
 
 <script>
 export default {
   name: "ClContactsAll",
+  data() {
+    return {
+      search: "",
+      activeUser: ""
+    };
+  },
+  computed: {
+    filteredContent() {
+      let filtered = this.$store.state.users;
+      if (this.search) {
+        filtered = this.$store.state.users.filter(
+          x => x.fullName.toLowerCase().indexOf(this.search) > -1
+        );
+      }
+
+      return filtered;
+    }
+  },
   methods: {
-    addNewRoute() {
-      console.log("eo me cliked");
-      this.$router.push("/add-new");
+    searchEmit(val) {
+      this.search = val;
+    },
+    cancelModalData() {
+      this.activeUser = "";
+    },
+    deleteUserCard(userId) {
+      this.activeUser = userId;
+    },
+    deleteUserModal() {
+      this.$store.commit("deleteUser", this.activeUser);
+      this.activeUser = "";
     }
   }
 };
