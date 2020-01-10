@@ -5,7 +5,7 @@
     :class="clazz"
     @click.stop="openSingleUser(user._id)"
   >
-    <div class="img">
+    <div class="img" :class="{ 'img--missing': !user.image }">
       <img v-if="user.image" :src="user.image" :alt="user.fullName" />
     </div>
     <p class="name text--14-18 bold"><slot>No name entered</slot></p>
@@ -53,7 +53,9 @@ export default {
       this.$store.commit("toggleFavorite", this.user._id);
     },
     deleteUser() {
-      this.$store.commit("deleteUser", this.user._id);
+      // this.$store.commit("deleteUser", this.user._id);
+      this.$store.commit("toggleModal");
+      this.$emit("deleteuser", this.user._id);
     },
     editUser() {
       this.$router.push(`/user/${this.user._id}/edit`);

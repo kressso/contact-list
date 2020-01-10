@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     users: [
       {
@@ -169,7 +171,8 @@ export default new Vuex.Store({
           }
         ]
       }
-    ]
+    ],
+    showModal: false
   },
   getters: {
     getSingleUser: (state) => (id) => {
@@ -180,6 +183,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    toggleModal (state) {
+      state.showModal = !state.showModal;
+    },
     toggleFavorite (state, payload) {
       state.users.filter(x => {
         if (x._id === payload) {

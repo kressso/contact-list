@@ -22,9 +22,13 @@
     width: calc-rem(46px);
     height: calc-rem(46px);
     border-radius: 50%;
-    border: calc-rem(3px) solid getColor('lighten-3');
+    border: calc-rem(3px) solid getColor('lighten-2');
     margin-right: calc-rem(25px);
     overflow: hidden;
+
+    &--missing {
+      background-color: rgba(getColor('primary-1'), 0.4);
+    }
 
     img {
       width: calc-rem(40px);
@@ -74,12 +78,6 @@
       opacity: 50%;
     }
   }
-
-  @include mq(w400) {}
-
-  @include mq(w480) {}
-
-  @include mq(w560) {}
 
   @include mq(w640) {
     flex-direction: column;
@@ -147,8 +145,6 @@
     }
   }
 
-  @include mq(w768) {}
-
   @include mq(w992) {
 
     &-add {
@@ -161,16 +157,4 @@
       min-height: calc-rem(154px);
     }
   }
-
-  @include mq(w1440) {}
-
-  @include mq(w1600) {}
-
-  @include mq(w1740) {}
-
-  @include mq(w1920) {}
-
-  @include mq(w2160) {}
-
-  @include mq(w2560) {}
 }

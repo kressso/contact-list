@@ -43,14 +43,6 @@ const routes = [
     name: 'error',
     component: () => import(/* webpackChunkName: "error" */ '../views/Error.vue')
   }
-
-
-
-  // contacts / all
-  // contacts / favorites
-  // user / :id
-  // user / :id / edit
-  // user / add-new
 ]
 
 const router = new VueRouter({

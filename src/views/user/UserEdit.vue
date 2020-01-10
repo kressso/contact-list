@@ -35,7 +35,7 @@
       </div>
       <div
         class="icons-right icons-right--del-position"
-        @click="deleteUser($event)"
+        @click="deleteUserModal($event)"
       >
         Delete
         <ClSvgTrash />
@@ -44,7 +44,10 @@
 
     <div class="user-add-new__body">
       <form>
-        <div class="form-item">
+        <div
+          class="form-item"
+          :class="{ 'form-item--error': $v.form.fullName.$error }"
+        >
           <label for="name"><ClSvgPerson /> full name</label>
           <input
             class="input"
@@ -54,7 +57,10 @@
             placeholder="Full name"
           />
         </div>
-        <div class="form-item">
+        <div
+          class="form-item"
+          :class="{ 'form-item--error': $v.form.email.$error }"
+        >
           <label for="email"><ClSvgMail /> email</label>
           <input
             class="input"
@@ -106,19 +112,23 @@
         <ClButton @click.native="saveUser($event)">Save</ClButton>
       </div>
     </div>
-    <pre>{{ form }}</pre>
+    <ClModal v-show="$store.state.showModal" @remove-user="deleteUser" />
   </div>
 </template>
 
 <script>
-import mixins from "@/utils/mixins";
+import { required, minLength, email } from "vuelidate/lib/validators";
 
 export default {
   name: "ClUserEdit",
-  mixins: [mixins],
+  validations: {
+    form: {
+      fullName: { required, min: minLength(4) },
+      email: { required, email }
+    }
+  },
   data() {
     return {
-      singleUser: {},
       image: "",
       form: {
         // _id: "",
@@ -137,6 +147,10 @@ export default {
     };
   },
   methods: {
+    deleteUser() {
+      this.$store.commit("deleteUser", this.$route.params.id);
+      this.$router.push(`/all`);
+    },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
@@ -148,6 +162,8 @@ export default {
       var image = new Image();
       var reader = new FileReader();
       var vm = this;
+
+      //TODO: missing validation for file type
 
       reader.onload = e => {
         vm.image = e.target.result;
@@ -170,34 +186,29 @@ export default {
       this.form.numbers.push({ phone: "", place: "" });
     },
     removeField(e, index) {
-      this.form.numbers = this.form.numbers.filter(x => {
-        return x.id !== index;
-      });
+      this.form.numbers.splice(index, 1);
     },
     saveUser() {
+      this.$v.form.$touch();
+      if (this.$v.form.$error) return;
       this.form.image = this.image;
       this.$store.commit("saveEditedUser", this.form);
       this.$router.push(`/user/${this.$route.params.id}`);
     },
-    deleteUser() {
-      this.$store.commit("deleteUser", this.$route.params.id);
-      this.$router.push(`/all`);
+    deleteUserModal() {
+      this.$store.commit("toggleModal");
     }
   },
   created() {
-    this.form = this.$store.getters.getSingleUser(this.$route.params.id);
+    this.form = JSON.parse(
+      JSON.stringify(this.$store.getters.getSingleUser(this.$route.params.id))
+    );
     if (this.form.image) {
       this.image = this.form.image;
     }
   }
 };
 </script>
-
-//TODO: kad obrises jedan, provjeri kako stoje stvari s tim indexom kad vise nije po redu, ili staviti neki generirani isto!
-
-// TODO: brisanje zadnjeg broja ne mozes!
-
-// TODO: mozda uopce ne moras nesto posebno spremati jer vec removeField brise, pogledaj samo izmjenu maila i imena
 
 <style>
 </style>

@@ -57,8 +57,8 @@ export default {
       this.$router.push(`/user/${this.user._id}/edit`);
     },
     deleteUser() {
-      this.$store.commit("deleteUser", this.$route.params.id);
-      this.$router.push("/all");
+      this.$store.commit("toggleModal");
+      this.$emit("deleteuser", this.user._id);
     }
   }
 };

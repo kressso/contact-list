@@ -12,7 +12,6 @@
 .label {
   position: relative;
   width: 100%;
-  // height: calc-rem(50px);
   max-width: calc-rem(540px);
 }
 
@@ -26,6 +25,12 @@
 
   &:not(:last-child) {
     border-bottom: 1px solid getColor('primary-2');
+  }
+
+  &--error {
+    .input {
+      border-color: red;
+    }
   }
 
   label {
@@ -103,7 +108,6 @@
       }
     }
   }
-
 }
 
 .search {
@@ -151,6 +155,11 @@
     outline: none;
     border: calc-rem(1px) solid getColor('primary-2');
   }
+}
+
+/* remove focus*/
+button {
+  outline: none;
 }
 
 /* hide input el */

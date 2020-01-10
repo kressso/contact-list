@@ -7,12 +7,22 @@
         <ClCardContact add-new></ClCardContact>
 
         <template v-for="user in filteredContent">
-          <ClCardContact :user="user" :key="user._id">
+          <ClCardContact
+            :user="user"
+            :key="user._id"
+            @deleteuser="deleteUserCard"
+          >
             {{ user.fullName }}
           </ClCardContact>
         </template>
       </div>
     </section>
+
+    <ClModal
+      v-show="$store.state.showModal"
+      @close="cancelModalData"
+      @remove-user="deleteUserModal"
+    />
   </div>
 </template>
 
@@ -21,7 +31,8 @@ export default {
   name: "ClContactsAll",
   data() {
     return {
-      search: ""
+      search: "",
+      activeUser: ""
     };
   },
   computed: {
@@ -39,6 +50,17 @@ export default {
   methods: {
     searchEmit(val) {
       this.search = val;
+    },
+    cancelModalData() {
+      this.activeUser = "";
+    },
+    deleteUserCard(userId) {
+      console.log("dosao emit", userId);
+      this.activeUser = userId;
+    },
+    deleteUserModal() {
+      this.$store.commit("deleteUser", this.activeUser);
+      this.activeUser = "";
     }
   }
 };

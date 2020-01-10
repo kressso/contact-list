@@ -40,19 +40,4 @@
   @include mq(w992) {
     padding-top: calc-rem(60px);
   }
-
-  @include mq(w1200) {}
-
-  @include mq(w1440) {}
-
-  @include mq(w1600) {}
-
-  @include mq(w1740) {}
-
-  @include mq(w1920) {}
-
-  @include mq(w2160) {}
-
-  @include mq(w2560) {}
-
 }

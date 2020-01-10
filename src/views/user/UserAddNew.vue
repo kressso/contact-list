@@ -6,7 +6,12 @@
     >
       <div v-if="!image">
         <label for="upload"><ClSvgUpload /></label>
-        <input id="upload" type="file" @change="onFileChange" />
+        <input
+          id="upload"
+          type="file"
+          accept="image/*"
+          @change="onFileChange"
+        />
       </div>
       <div v-else>
         <ClSvgRemove @click.native="removeImage" />
@@ -23,7 +28,12 @@
       >
         <div v-if="!image">
           <label for="upload"><ClSvgUpload /></label>
-          <input id="upload" type="file" @change="onFileChange" />
+          <input
+            id="upload"
+            type="file"
+            accept="image/*"
+            @change="onFileChange"
+          />
         </div>
         <div v-else>
           <ClSvgRemove @click.native="removeImage" />
@@ -37,7 +47,10 @@
 
     <div class="user-add-new__body">
       <form>
-        <div class="form-item">
+        <div
+          class="form-item"
+          :class="{ 'form-item--error': $v.form.fullName.$error }"
+        >
           <label for="name"><ClSvgPerson /> full name</label>
           <input
             class="input"
@@ -47,7 +60,10 @@
             placeholder="Full name"
           />
         </div>
-        <div class="form-item">
+        <div
+          class="form-item"
+          :class="{ 'form-item--error': $v.form.email.$error }"
+        >
           <label for="email"><ClSvgMail /> email</label>
           <input
             class="input"
@@ -59,9 +75,6 @@
         </div>
         <div class="form-item">
           <label for="numbers"><ClSvgPhone /> numbers</label>
-          <!-- <template v-for="(item, index) in form.numbers">
-            <ClInputDouble :key="index" :item="item" />
-          </template> -->
 
           <div
             class="input__double--holder"
@@ -92,6 +105,7 @@
           >
         </div>
       </form>
+
       <div class="btn__wrap">
         <ClButton color="secondary" @click.native="redirectBack($event)"
           >Cancel</ClButton
@@ -99,13 +113,19 @@
         <ClButton @click.native="saveUser($event)">Save</ClButton>
       </div>
     </div>
-    <pre>{{ form }}</pre>
   </div>
 </template>
 
 <script>
+import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
   name: "ClUserAddNew",
+  validations: {
+    form: {
+      fullName: { required, min: minLength(4) },
+      email: { required, email }
+    }
+  },
   data() {
     return {
       image: "",
@@ -123,8 +143,7 @@ export default {
         numbers: [
           {
             phone: "",
-            place: "",
-            id: 0
+            place: ""
           }
         ]
       }
@@ -141,6 +160,8 @@ export default {
       var image = new Image();
       var reader = new FileReader();
       var vm = this;
+
+      // TODO: missing validation for file type
 
       reader.onload = e => {
         vm.image = e.target.result;
@@ -162,11 +183,11 @@ export default {
       this.form.numbers.push({ phone: "", place: "" });
     },
     removeField(e, index) {
-      this.form.numbers = this.form.numbers.filter(x => {
-        return x.id !== index;
-      });
+      this.form.numbers.splice(index, 1);
     },
     saveUser() {
+      this.$v.form.$touch();
+      if (this.$v.form.$error) return;
       this.form.image = this.image;
       this.$store.commit("saveNewUser", this.form);
       this.$router.push(`/all`);
