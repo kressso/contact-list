@@ -35,7 +35,7 @@
 *
 */
 @function get-line-height($font-size, $line-height) {
-  @return $line-height / $font-size;
+  @return calc($line-height / $font-size);
 }
 
 /*
@@ -47,12 +47,12 @@ $browser-context: 16px;
 
 // REM
 @function calc-rem($size, $context: $browser-context) {
-  $rem-size: $size / $context;
+  $rem-size: calc($size / $context);
   @return #{$rem-size}rem;
 }
 
 // EM
 @function calc-em($size, $context: $browser-context) {
-  $em-size: $size / $context;
+  $em-size: calc($size / $context);
   @return #{$em-size}em;
 }
